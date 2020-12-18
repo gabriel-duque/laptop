@@ -1,0 +1,27 @@
+---
+
+- name: Set timezone
+  file:
+    src: '/usr/share/zoneinfo/{{ timezone }}'
+    dest: /etc/localtime
+    state: link
+  notify: Update system clock
+
+- name: Generate locale.gen
+  template:
+    src: locale.gen.j2
+    dest: /etc/locale.gen
+    mode: '0644'
+  notify: Generate locales
+
+- name: Generate locale.conf
+  template:
+    src: locale.conf.j2
+    dest: /etc/locale.conf
+    mode: '0644'
+
+- name: Generate vconsole.conf
+  template:
+    src: vconsole.conf.j2
+    dest: /etc/vconsole.conf
+    mode: '0644'

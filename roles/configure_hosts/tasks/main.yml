@@ -1,0 +1,13 @@
+---
+
+- name: Generate hostname file
+  template:
+    src: hostname.j2
+    dest: /etc/hostname
+    mode: '0644'
+
+- name: Generate hosts file
+  template:
+    src: hosts.j2
+    dest: /etc/hosts
+    mode: '0644'

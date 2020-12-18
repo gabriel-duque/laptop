@@ -1,0 +1,7 @@
+---
+
+- name: Update system clock
+  command: hwclock --systohc
+
+- name: Generate locales
+  command: locale-gen

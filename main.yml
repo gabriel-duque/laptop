@@ -1,0 +1,8 @@
+---
+
+- hosts: laptop
+  force_handlers: true
+  roles:
+  - role: configure_localization
+  - role: configure_hosts
+  - role: install_packages

@@ -1,0 +1,62 @@
+---
+
+# Configuration variables for my system
+
+timezone: 'Europe/Paris'
+locales:
+  - 'en_US.UTF-8'
+  - 'en_US ISO-8859-1'
+  - 'fr_FR.UTF-8'
+  - 'fr_FR ISO-8859-1'
+keymap: 'us'
+hostname: 'slowbro'
+pacman:
+  packages:
+    - alacritty
+    - alsa-utils
+    - ansible
+    - ansible-lint
+    - arandr
+    - arch-install-scripts
+    - base
+    - base-devel
+    - btrfs-progs
+    - chromium
+    - clang
+    - cryptsetup
+    - dmenu
+    - dosfstools
+    - efitools
+    - feh
+    - gdb
+    - git-crypt
+    - gnupg
+    - go
+    - i3-gaps
+    - i3lock
+    - i3status
+    - i3status-rust
+    - imagemagick
+    - jdk-openjdk
+    - libreoffice-still
+    - lightdm
+    - lightdm-gtk-greeter
+    - linux
+    - linux-firmware
+    - llvm
+    - mypy
+    - openssl
+    - pacman-contrib
+    - parted
+    - pavucontrol
+    - pulseaudio
+    - python
+    - python-black
+    - sbsigntools
+    - texlive-most
+    - vim
+    - vlc
+    - xorg
+    - yamllint
+    - zathura
+    - zathura-pdf-mupdf
