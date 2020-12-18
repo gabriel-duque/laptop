@@ -2,5 +2,5 @@
 
 - name: Install packages
   community.general.pacman:
-    update_cache: yes
+    update_cache: true
     name: '{{ pacman.packages }}'

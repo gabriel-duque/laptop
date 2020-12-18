@@ -11,5 +11,5 @@
     comment: 'Gabriel Duque'
     group: 'users'
     groups:
-    - wheel
+      - wheel
     password: '{{ secrets.zuh0.passwd_hash }}'
