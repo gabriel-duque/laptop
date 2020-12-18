@@ -1,0 +1,15 @@
+---
+
+- name: Create root user
+  user:
+    name: 'root'
+    password: '{{ secrets.root.passwd_hash }}'
+
+- name: Create regular user
+  user:
+    name: 'zuh0'
+    comment: 'Gabriel Duque'
+    group: 'users'
+    groups:
+    - wheel
+    password: '{{ secrets.zuh0.passwd_hash }}'
