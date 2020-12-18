@@ -1,0 +1,12 @@
+arch-install-scripts
+btrfs-progs
+coreutils
+cryptsetup
+dosfstools
+e2fsprogs
+gawk
+grep
+pacman-contrib
+parted
+systemd
+util-linux

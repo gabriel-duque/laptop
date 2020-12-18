@@ -1,0 +1,9 @@
+ansible
+base
+btrfs-progs
+dosfstools
+efitools
+linux
+linux-firmware
+openssl
+sbsigntools
