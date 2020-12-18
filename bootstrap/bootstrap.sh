@@ -12,7 +12,8 @@ esp_fs_label="arch-esp"
 
 luks_part_name="arch-crypt"
 luks_part_label="arch-crypt"
-luks_dm_name="arch-crypt"
+#luks_dm_name="arch-crypt"
+luks_dm_name="arch-crypt-test"
 luks_dm_dev="/dev/mapper/$luks_dm_name"
 luks_cipher="aes-xts-plain64"
 luks_hash="sha512"
@@ -20,7 +21,8 @@ luks_key_size="512"
 
 sys_fs_label="arch-sys"
 
-swapfile_size="$(free -b | awk '/^Mem:/ {print $2}')"
+#swapfile_size="$(free -b | awk '/^Mem:/ {print $2}')"
+swapfile_size="$(free | awk '/^Mem:/ {print $2}')"
 swapfile_label="arch-swap"
 
 hostname="slowbro"
@@ -123,7 +125,7 @@ host_setup() {
   quiet pacman -Syu --noconfirm
   log "Updated host packages"
 
-  quiet pacman -S --noconfirm --needed - < "host_pkg_list"
+  quiet pacman -S --noconfirm --needed - < "bootstrap/host_pkg_list"
   log "Installed necessary host packages"
 
   echo "Ranking mirrors, this can take some time..."
@@ -245,7 +247,7 @@ mount_filesystems() {
 
 bootstrap_new_system() {
   echo "Installing bootstrap guest packages, this can take some time..."
-  quiet pacstrap /mnt - < "pacstrap_pkg_list"
+  quiet pacstrap /mnt - < "bootstrap/pacstrap_pkg_list"
   log "Installed bootstrap guest packages"
 }
 

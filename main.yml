@@ -7,3 +7,9 @@
   - role: configure_localization
   - role: configure_hosts
   - role: install_packages
+
+- hosts: laptop
+  vars_files:
+  - vaulted_vars/secrets
+  roles:
+  - role: create_users
