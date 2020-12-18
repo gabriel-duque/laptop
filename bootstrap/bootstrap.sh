@@ -247,21 +247,6 @@ bootstrap_new_system() {
   echo "Installing bootstrap guest packages, this can take some time..."
   quiet pacstrap /mnt - < "pacstrap_pkg_list"
   log "Installed bootstrap guest packages"
-
-  cat > /mnt/etc/fstab << EOF_FSTAB
-# Our BTRFS subvolumes
-LABEL=$sys_fs_label / btrfs ${btrfs_opts},subvol=@root 0 0
-LABEL=$sys_fs_label /home btrfs ${btrfs_opts},subvol=@home 0 0
-LABEL=$sys_fs_label /swap btrfs ${btrfs_opts},subvol=@swap 0 0
-LABEL=$sys_fs_label /.snapshots btrfs ${btrfs_opts},subvol=@snapshots 0 0
-
-# Our ESP
-LABEL=$esp_fs_label /boot/efi vfat defaults 0 2
-
-# Our swap file
-/swap/swapfile none swap defaults 0 0
-EOF_FSTAB
-  log "Generated filesystem table"
 }
 
 run_chroot_script() {

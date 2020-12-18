@@ -1,0 +1,7 @@
+---
+
+- name: Generate fstab
+  template:
+    src: fstab.j2
+    dest: /etc/fstab
+    mode: '0644'

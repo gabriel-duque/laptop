@@ -1,0 +1,10 @@
+{{ ansible_managed | comment }}
+
+LABEL={{ sys_fs_label }} / btrfs {{ btrfs_opts }},subvol=@root 0 0
+LABEL={{ sys_fs_label }} /home btrfs {{ btrfs_opts }},subvol=@home 0 0
+LABEL={{ sys_fs_label }} /swap btrfs {{ btrfs_opts }},subvol=@swap 0 0
+LABEL={{ sys_fs_label }} /.snapshots btrfs {{ btrfs_opts }},subvol=@snapshots 0 0
+
+LABEL={{ esp_fs_label }} /boot/efi vfat defaults 0 2
+
+/swap/swapfile none swap defaults 0 0

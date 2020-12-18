@@ -2,6 +2,9 @@
 
 # Configuration variables for my system
 
+esp_fs_label: 'arch-esp'
+sys_fs_label: 'arch-sys'
+btrfs_opts: 'compress=zstd,discard'
 timezone: 'Europe/Paris'
 locales:
   - 'en_US.UTF-8'
