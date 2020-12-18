@@ -30,6 +30,7 @@ pacman:
     - dmenu
     - dosfstools
     - efitools
+    - expect
     - feh
     - gdb
     - git-crypt
