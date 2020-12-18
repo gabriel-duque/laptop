@@ -12,8 +12,7 @@ esp_fs_label="arch-esp"
 
 luks_part_name="arch-crypt"
 luks_part_label="arch-crypt"
-#luks_dm_name="arch-crypt"
-luks_dm_name="arch-crypt-test"
+luks_dm_name="arch-crypt"
 luks_dm_dev="/dev/mapper/$luks_dm_name"
 luks_cipher="aes-xts-plain64"
 luks_hash="sha512"
@@ -21,13 +20,8 @@ luks_key_size="512"
 
 sys_fs_label="arch-sys"
 
-#swapfile_size="$(free -b | awk '/^Mem:/ {print $2}')"
-swapfile_size="$(free | awk '/^Mem:/ {print $2}')"
+swapfile_size="$(free -b | awk '/^Mem:/ {print $2}')"
 swapfile_label="arch-swap"
-
-hostname="slowbro"
-timezone="Europe/Paris"
-locale="en_US.UTF-8"
 
 btrfs_opts="compress=zstd,discard"
 
@@ -58,6 +52,10 @@ chroot_log() {
 }
 
 initial_checks() {
+  if ! test -f ansible.cfg; then
+    die "It looks like you haven't run this script from the root of the project"
+  fi
+
   if ! test -d "/sys/firmware/efi"; then
     die "It looks like you did not boot in EFI mode."
   fi
@@ -78,25 +76,6 @@ get_confirmation() {
     echo "Aborting."
     exit 0
   fi
-}
-
-root_passwd_prompt() {
-  passwd=
-  confirmation=
-
-  while test "$passwd" != "$confirmation" || test "${#passwd}" -eq 0; do
-    echo "Enter root password (password will not be echoed):"
-    stty -echo
-    read -r passwd
-    stty echo
-
-    echo "Enter the same password again:"
-    stty -echo
-    read -r confirmation
-    stty echo
-  done
-
-  root_passwd="$passwd"
 }
 
 luks_passwd_prompt() {
@@ -252,22 +231,27 @@ bootstrap_new_system() {
 }
 
 run_chroot_script() {
-  if test -n "$root_passwd"; then
-    export root_passwd
-  fi
-  export luks_passwd
-
-  echo "In chroot"
+  here="$(pwd)"
+  target="/root/$(basename "$here")"
+  cp -r "$here" "/mnt$target"
+  echo "Running ansible playbook on guest system, this can take some time..."
+  quiet arch-chroot /mnt /bin/sh -c \
+                     "cd $target \
+                     && ansible-galaxy collection install -r requirements.yml \
+                     && ansible-playbook main.yml"
+  log "Ran ansible playbook on guest system"
 }
 
 cleanup() {
-  echo "Cleaning up"
+  swapoff /mnt/swap/swapfile
+  umount -R /mnt
+  cryptsetup luksClose "$luks_dm_name"
+  log "All done"
 }
 
 do_install() {
   initial_checks
   get_confirmation "This script WILL wipe your disks."
-  root_passwd_prompt
   luks_passwd_prompt
   host_setup
 
@@ -280,9 +264,6 @@ do_install() {
   make_filesystems
   mount_filesystems
   bootstrap_new_system
-
-  get_confirmation "Initial setup is done. Run the 'chroot.sh' script?"
-
   run_chroot_script
   cleanup
 }
