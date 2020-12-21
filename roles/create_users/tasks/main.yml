@@ -11,5 +11,6 @@
     comment: 'Gabriel Duque'
     group: 'users'
     groups:
+      - docker
       - wheel
     password: '{{ secrets.zuh0.passwd_hash }}'

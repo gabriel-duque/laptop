@@ -20,6 +20,7 @@ pacman:
     - alsa-utils
     - ansible
     - ansible-lint
+    - apache
     - arandr
     - arch-install-scripts
     - base
@@ -30,6 +31,7 @@ pacman:
     - cryptsetup
     - dmenu
     - dosfstools
+    - docker
     - efitools
     - expect
     - feh
@@ -50,6 +52,7 @@ pacman:
     - linux-firmware
     - llvm
     - mypy
+    - nmap
     - openssl
     - pacman-contrib
     - parted
