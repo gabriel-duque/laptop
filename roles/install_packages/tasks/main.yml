@@ -4,3 +4,4 @@
   community.general.pacman:
     update_cache: true
     name: '{{ pacman.packages }}'
+    state: latest
