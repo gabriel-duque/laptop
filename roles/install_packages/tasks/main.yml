@@ -5,3 +5,8 @@
     update_cache: true
     name: '{{ pacman.packages }}'
     state: latest
+
+- name: Upgrade packages
+  community.general.pacman:
+    update_cache: true
+    upgrade: true
