@@ -28,10 +28,11 @@ pacman:
     - btrfs-progs
     - chromium
     - clang
+    - cowsay
     - cryptsetup
     - dmenu
-    - dosfstools
     - docker
+    - dosfstools
     - efitools
     - expect
     - feh
@@ -68,3 +69,4 @@ pacman:
     - yamllint
     - zathura
     - zathura-pdf-mupdf
+    - zip
