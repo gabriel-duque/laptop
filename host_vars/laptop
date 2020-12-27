@@ -25,6 +25,7 @@ pacman:
     - arch-install-scripts
     - base
     - base-devel
+    - bash-completion
     - btrfs-progs
     - chromium
     - clang
