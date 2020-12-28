@@ -30,6 +30,7 @@ pacman:
     - buildah
     - chromium
     - clang
+    - cloc
     - cowsay
     - cryptsetup
     - dmenu
